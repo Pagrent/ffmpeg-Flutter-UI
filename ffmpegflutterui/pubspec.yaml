@@ -35,6 +35,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  ffmpeg_kit_flutter: ^6.0.3 # 检查最新版本
+  path_provider: ^2.1.5    # 用于文件路径处理
+  file_picker: ^10.2.0      # 用于文件选择
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
