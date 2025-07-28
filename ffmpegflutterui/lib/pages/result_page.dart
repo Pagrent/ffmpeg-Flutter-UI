@@ -12,6 +12,10 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 25,
+        ),
         title: Text("Output"),
         backgroundColor: Colors.blue,
       ),
