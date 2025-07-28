@@ -12,6 +12,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 25,
+        ),
         title: Text("Settings"),
         backgroundColor: Colors.blue,
       ),
