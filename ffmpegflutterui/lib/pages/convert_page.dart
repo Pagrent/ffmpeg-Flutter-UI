@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:ffmpegflutterui/utils/confirm_file.dart';
-import 'package:ffmpegflutterui/utils/file_list.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ConvertPage extends StatefulWidget {
   final List<String> fileList;
@@ -16,15 +19,80 @@ class ConvertPage extends StatefulWidget {
 
 class _ConvertPageState extends State<ConvertPage> {
 
+  String? workDir;
+  Future<void> _getWorkingDir() async {                     //工作目录喵
+    final dir = await getApplicationDocumentsDirectory();
+    setState(() {
+      workDir = dir.path;
+    });
+  }
+
+  Future<bool> _requestStoragePermission() async {           //权限喵
+    if (Platform.isAndroid) {
+      final status = await Permission.storage.request();
+      return status.isGranted;
+    }
+    return true; // iOS/macOS 不需要显式请求
+  }
+
 
   @override
-  void initState() {
-  super.initState();
-  print("你就赤石吧: ${widget.fileList.length}");
-  print("赤这么多石: ${widget.fileList.join(', ')}");
-}
+
   Widget build(BuildContext context) {
+
+    if(widget.fileList.length == 0)
+    {
+      return Scaffold(
+
+        appBar: AppBar(
+        
+          titleTextStyle: TextStyle(
+            color: Colors.blueGrey[800],
+            fontSize: 30,
+          ),
+        
+          title: Text("Convert"),
+          backgroundColor: Colors.deepPurple[100],
+        ),
+
+        body: Center(
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.redAccent[100],
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Icon(
+                  Icons.warning_amber_rounded,
+                  size: 50,
+                  color: Colors.red[800],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Please Select File",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.red[800],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
+
+
       appBar: AppBar(
         
         titleTextStyle: TextStyle(

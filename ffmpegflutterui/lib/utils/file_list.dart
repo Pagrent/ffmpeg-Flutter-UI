@@ -31,6 +31,10 @@ class FileList extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width - 50,
           padding: EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.deepPurple[100],
+            borderRadius: BorderRadius.circular(25),
+          ),
           child: Row(
             children: [
               Icon(
@@ -45,10 +49,6 @@ class FileList extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          decoration: BoxDecoration(
-            color: Colors.deepPurple[100],
-            borderRadius: BorderRadius.circular(25),
           ),
         ),
       ),

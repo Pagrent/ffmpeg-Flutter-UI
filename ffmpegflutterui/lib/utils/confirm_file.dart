@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ConfirmFile extends StatelessWidget {
   final String fileName;
+
+  //double cardWidth = window.physicalSize.width / 2 - 25.0;
 
   ConfirmFile({
     super.key,
@@ -12,10 +13,13 @@ class ConfirmFile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0,),
+      padding: EdgeInsets.only(left: 25.0, right: MediaQuery.of(context).size.width / 2 - 25, top: 25,),
       child: Container(
-        width: MediaQuery.of(context).size.width / 2 - 50,
         padding: EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.deepPurple[100],
+          borderRadius: BorderRadius.circular(25),
+        ),
         child: Row(
           children: [
             Icon(
@@ -30,10 +34,6 @@ class ConfirmFile extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        decoration: BoxDecoration(
-          color: Colors.deepPurple[100],
-          borderRadius: BorderRadius.circular(25),
         ),
       ),
     );

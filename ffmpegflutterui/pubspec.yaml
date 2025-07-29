@@ -38,6 +38,7 @@ dependencies:
   ffmpeg_kit_flutter_new: ^3.0.1 # 检查最新版本
   path_provider: ^2.1.5    # 用于文件路径处理
   file_picker: ^10.2.0      # 用于文件选择
+  permission_handler: ^12.0.1 #用于获取权限
 
   flutter_slidable: ^4.0.0
 
