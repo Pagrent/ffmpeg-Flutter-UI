@@ -23,7 +23,7 @@ class _PlatformPageState extends State<PlatformPage> {
   final List _pages = [
     InputPage(),
 
-    ConvertPage(),
+    //ConvertPage(),
 
     ResultPage(),
 

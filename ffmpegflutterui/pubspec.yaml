@@ -39,6 +39,8 @@ dependencies:
   path_provider: ^2.1.5    # 用于文件路径处理
   file_picker: ^10.2.0      # 用于文件选择
 
+  flutter_slidable: ^4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
