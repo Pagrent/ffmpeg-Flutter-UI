@@ -37,6 +37,15 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    compileSdk = 33
+
+    packagingOptions {
+        resources.pickFirsts.add("lib/x86/libc++_shared.so")
+        resources.pickFirsts.add("lib/x86_64/libc++_shared.so")
+        resources.pickFirsts.add("lib/armeabi-v7a/libc++_shared.so")
+        resources.pickFirsts.add("lib/arm64-v8a/libc++_shared.so")
+    }
 }
 
 flutter {

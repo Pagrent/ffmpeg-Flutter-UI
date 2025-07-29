@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class ResultPage extends StatefulWidget {
   const ResultPage({super.key});
@@ -12,12 +13,14 @@ class _ResultPageState extends State<ResultPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 25,
+          color: Colors.blueGrey[800],
+          fontSize: 30,
         ),
+        
         title: Text("Output"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.deepPurple[100],
       ),
     );
   }
