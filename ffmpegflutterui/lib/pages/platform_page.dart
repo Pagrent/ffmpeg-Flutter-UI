@@ -3,6 +3,7 @@ import 'package:ffmpegflutterui/pages/input_page.dart';
 import 'package:ffmpegflutterui/pages/result_page.dart';
 import 'package:ffmpegflutterui/pages/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 class PlatformPage extends StatefulWidget {
   const PlatformPage({super.key});
@@ -36,9 +37,7 @@ class _PlatformPageState extends State<PlatformPage> {
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blue,
-        unselectedItemColor: Colors.black,
-        selectedItemColor: Colors.white,
+        backgroundColor: Colors.deepPurple[100],
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         items: [
