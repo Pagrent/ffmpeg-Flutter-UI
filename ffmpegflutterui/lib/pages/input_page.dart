@@ -31,45 +31,64 @@ class _InputPageState extends State<InputPage> {
     });
   }
 
+  void goToConvert(List<String> fuckList) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ConvertPage(
+          fileList: fuckList,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         titleTextStyle: TextStyle(
-          
           color: Colors.blueGrey[800],
           fontSize: 30,
         ),
         
         title: Text("Input"),
         backgroundColor: Colors.deepPurple[100],
+
+        actions: [
+          GestureDetector(
+            onTap: pickFile,
+            child: Container(
+              height: 35,
+              width: 60,
+              child: Center(
+                child: Text(
+                  "Add a file",
+                  style: TextStyle(
+                    color: Colors.blueGrey[800],
+                    fontSize: 12
+                  ),
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              pickFile();
+            },
+            icon: Icon(Icons.add),
+          ),
+          SizedBox(width: 10,)
+        ],
+        
       ),
 
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: pickFile,
-            child: Icon(Icons.add),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              print("傻逼东西,${fileList.join(', ')}");
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:(context) => ConvertPage(
-                    fileList: fileList,
-                  ),
-                )
-              );
-            },
-            child: Icon(Icons.save),
-          )
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          goToConvert(
+            fileList
+          );
+        },
+        child: Icon(Icons.save),
       ),
 
       body: ListView.builder(
