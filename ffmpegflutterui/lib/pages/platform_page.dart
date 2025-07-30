@@ -47,13 +47,6 @@ class _PlatformPageState extends State<PlatformPage> {
             label: "Select File",
           ),
 
-/*
-          BottomNavigationBarItem(
-            icon: Icon(Icons.compare_arrows),
-            label: "Choose Convert Format"
-          ),
-*/
-
           BottomNavigationBarItem(
             icon: Icon(Icons.output),
             label: "Output File",
