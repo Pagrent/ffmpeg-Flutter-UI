@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ConvertPage extends StatefulWidget {
-  final List<String> fileList;
+  final List<File> fileList;
 
   const ConvertPage({
     required this.fileList,
@@ -19,22 +19,7 @@ class ConvertPage extends StatefulWidget {
 
 class _ConvertPageState extends State<ConvertPage> {
 
-  String? workDir;
-  Future<void> _getWorkingDir() async {                     //工作目录喵
-    final dir = await getApplicationDocumentsDirectory();
-    setState(() {
-      workDir = dir.path;
-    });
-  }
-
-  Future<bool> _requestStoragePermission() async {           //权限喵
-    if (Platform.isAndroid) {
-      final status = await Permission.storage.request();
-      return status.isGranted;
-    }
-    return true; // iOS/macOS 不需要显式请求
-  }
-
+  
 
   @override
 
@@ -109,7 +94,7 @@ class _ConvertPageState extends State<ConvertPage> {
         itemCount: widget.fileList.length,
         itemBuilder: (context, index){
           return ConfirmFile(
-            fileName: widget.fileList[index],
+            fileName: widget.fileList[index].path.split('/').last,
           );
         },
       ),
