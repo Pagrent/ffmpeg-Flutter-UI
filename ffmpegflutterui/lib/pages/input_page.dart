@@ -98,96 +98,31 @@ class _InputPageState extends State<InputPage> {
   }
 
   void goToConvert(List<File> fuckList) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ConvertPage(
-          fileList: fuckList,
-          selectedFunction: widget.selectedFunction,
+    if(fileList.isNotEmpty){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ConvertPage(
+            fileList: fuckList,
+            selectedFunction: widget.selectedFunction,
+          ),
         ),
-      ),
-    );
+      );
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Press the Add Button at Top Right Corner to Select File")
+        )
+      );
+    }
   }
 
   
 
   @override
   Widget build(BuildContext context) {
-    if(fileList.isEmpty){
-      return Scaffold(
-
-        appBar: AppBar(
-          titleTextStyle: TextStyle(
-            color: Colors.blueGrey[800],
-            fontSize: 30,
-          ),
-        
-          title: Text("Input"),
-          backgroundColor: Colors.deepPurple[100],
-
-          actions: [
-            GestureDetector(
-              onTap: pickFile,
-              child: Container(
-                height: 35,
-                width: 60,
-                child: Center(
-                  child: Text(
-                    "Add a file",
-                    style: TextStyle(
-                      color: Colors.blueGrey[800],
-                      fontSize: 12
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                pickFile();
-              },
-              icon: Icon(Icons.add),
-            ),
-            SizedBox(width: 10,)
-          ],
-        
-        ),
-
-        body: Center(
-          child: Container(
-            height: 120,
-            width: 420,
-            decoration: BoxDecoration(
-              color: Colors.redAccent[100],
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 15,
-                ),
-                Icon(
-                  Icons.warning_amber_rounded,
-                  size: 50,
-                  color: Colors.red[800],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Press the Add Button at\nTop Right Corner to Select File",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.red[800],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+    
     _getWorkingDir();
     print("该死$workDir喵");
     return Scaffold(
