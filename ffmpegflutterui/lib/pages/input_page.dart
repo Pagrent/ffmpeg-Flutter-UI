@@ -8,15 +8,18 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+  int selectedFunction;
+
+  InputPage({
+    required this.selectedFunction,
+    super.key
+  });
 
   @override
   State<InputPage> createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
-
-  
 
   String? workDir;
 
@@ -82,7 +85,9 @@ class _InputPageState extends State<InputPage> {
     setState(() => isCopying = false);
     
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copy $filesCopied/$totalFiles files to working directory')),
+      SnackBar(
+        content: Text('Copy $filesCopied/$totalFiles files to working directory')
+      ),
     );
   }
 
@@ -98,6 +103,7 @@ class _InputPageState extends State<InputPage> {
       MaterialPageRoute(
         builder: (context) => ConvertPage(
           fileList: fuckList,
+          selectedFunction: widget.selectedFunction,
         ),
       ),
     );

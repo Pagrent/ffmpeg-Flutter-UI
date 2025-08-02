@@ -7,9 +7,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 class ConvertPage extends StatefulWidget {
   final List<File> fileList;
+  final int selectedFunction;
 
   const ConvertPage({
     required this.fileList,
+    required this.selectedFunction,
     super.key,
   });
 

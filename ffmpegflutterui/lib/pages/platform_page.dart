@@ -35,7 +35,7 @@ class _PlatformPageState extends State<PlatformPage> {
   final List _pages = [
     FunctionPage(),
 
-    InputPage(),
+    //InputPage(),
 
     //ConvertPage(),
 
@@ -58,11 +58,6 @@ class _PlatformPageState extends State<PlatformPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.functions),
             label: "Choose Function",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.input),
-            label: "Select File",
           ),
 
           BottomNavigationBarItem(
