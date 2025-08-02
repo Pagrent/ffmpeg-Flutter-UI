@@ -17,7 +17,7 @@ class FunctionList extends StatefulWidget {
 }
 
 class _FunctionListState extends State<FunctionList> {
-  int? selectedCategory;
+  int selectedCategory = 0;
 
   @override
   Widget build(BuildContext context) {

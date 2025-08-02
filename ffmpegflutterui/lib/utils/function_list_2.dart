@@ -1,3 +1,4 @@
+import 'package:ffmpegflutterui/pages/input_page.dart';
 import 'package:ffmpegflutterui/utils/info_list.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,31 @@ class ShinoList extends StatefulWidget {
 }
 
 class _ShinoListState extends State<ShinoList> {
-  int? selectedFunction;
+  int selectedFunction = 0;
 
   @override
   Widget build(BuildContext context) {
+
+    void goToInput() {
+      print("傻逼$selectedFunction");
+      if(selectedFunction != 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InputPage(
+              selectedFunction: selectedFunction,
+            )
+          )
+        );
+      }
+      else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Please Select a Function")
+          )
+        );
+      }
+    }
     
     if(widget.selectedCategory == 1) {
       return Column(
@@ -47,11 +69,18 @@ class _ShinoListState extends State<ShinoList> {
                   enableFilter: true,
                   width: MediaQuery.of(context).size.width / 2,
                   onSelected: (sukiFunction) {
-                    setState(() {
-                      selectedFunction = sukiFunction;
-                    });
+                    if(sukiFunction != null) {
+                      setState(() {
+                        selectedFunction = sukiFunction;
+                      });
+                    }
+                    else {
+                      selectedFunction = 0;
+                    }
                   },
                   dropdownMenuEntries: <DropdownMenuEntry<int>>[
+                    DropdownMenuEntry(value: 0, label: "None"),
+
                     DropdownMenuEntry(value: 1, label: "Format Conversion"),
                     DropdownMenuEntry(value: 2, label: "Video Transcoding"),
                     DropdownMenuEntry(value: 3, label: "Trim Video"),
@@ -103,11 +132,18 @@ class _ShinoListState extends State<ShinoList> {
                   enableFilter: true,
                   width: MediaQuery.of(context).size.width / 2,
                   onSelected: (sukiFunction) {
-                    setState(() {
-                      selectedFunction = sukiFunction;
-                    });
+                    if(sukiFunction != null) {
+                      setState(() {
+                        selectedFunction = sukiFunction;
+                      });
+                    }
+                    else {
+                      selectedFunction = 0;
+                    }
                   },
                   dropdownMenuEntries: <DropdownMenuEntry<int>>[
+                    DropdownMenuEntry(value: 0, label: "None"),
+
                     DropdownMenuEntry(value: 21, label: "Format Convertion"),
                     DropdownMenuEntry(value: 22, label: "Audio Transcoding"),
                     DropdownMenuEntry(value: 23, label: "Adjust Volume"),
@@ -156,11 +192,18 @@ class _ShinoListState extends State<ShinoList> {
                   enableFilter: true,
                   width: MediaQuery.of(context).size.width / 2,
                   onSelected: (sukiFunction) {
-                    setState(() {
-                      selectedFunction = sukiFunction;
-                    });
+                    if(sukiFunction != null) {
+                      setState(() {
+                        selectedFunction = sukiFunction;
+                      });
+                    }
+                    else {
+                      selectedFunction = 0;
+                    }
                   },
                   dropdownMenuEntries: <DropdownMenuEntry<int>>[
+                    DropdownMenuEntry(value: 0, label: "None"),
+
                     DropdownMenuEntry(value: 31, label: "Video to GIF"),
                     DropdownMenuEntry(value: 32, label: "Extract Video Frames"),
                   ],
@@ -204,7 +247,19 @@ class _ShinoListState extends State<ShinoList> {
               DropdownMenu(
                 enableFilter: true,
                 width: MediaQuery.of(context).size.width / 2,
+                onSelected: (sukiFunction) {
+                  if(sukiFunction != null) {
+                    setState(() {
+                      selectedFunction = sukiFunction;
+                    });
+                  }
+                  else {
+                    selectedFunction = 0;
+                  }
+                },
                 dropdownMenuEntries: <DropdownMenuEntry<int>>[
+                  DropdownMenuEntry(value: 0, label: "None"),
+
                   DropdownMenuEntry(value: 1, label: "Format Conversion"),
                   DropdownMenuEntry(value: 2, label: "Video Transcoding"),
                   DropdownMenuEntry(value: 3, label: "Trim Video"),
@@ -232,6 +287,10 @@ class _ShinoListState extends State<ShinoList> {
         InfoList(
           selectedFunction: selectedFunction,
         ),
+        FloatingActionButton(
+          onPressed: goToInput,
+          child: Icon(Icons.navigate_next),
+        )
       ],
     );
 
