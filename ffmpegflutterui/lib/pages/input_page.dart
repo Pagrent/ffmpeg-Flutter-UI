@@ -23,15 +23,24 @@ class _InputPageState extends State<InputPage> {
 
   String? workDir;
 
-  Future<void> _getWorkingDir() async {
+  Future<void> _getWorkingDir() async {                       //获取工作目录喵
     final dir = await getApplicationDocumentsDirectory();
     final targetDir = Directory('${dir.path}/FFmpegFlutterUI');
+    final inputDir = Directory('${targetDir.path}/input');
+    final outputDir = Directory('${targetDir.path}/output');
   
     if (!await targetDir.exists()) {                            //确保目录存在喵
       await targetDir.create(recursive: true);
     }
+    if (!await inputDir.exists()) {                            //确保目录存在喵
+      await inputDir.create(recursive: true);
+    }
+    if (!await outputDir.exists()) {                            //确保目录存在喵
+      await outputDir.create(recursive: true);
+    }
   
     workDir = targetDir.path; 
+    print("该死$workDir喵");
   }
 
 
@@ -67,7 +76,7 @@ class _InputPageState extends State<InputPage> {
     for (int i = 0; i < totalFiles; i++) {
       final file = fileList[i];
       final fileName = file.path.split('/').last;
-      final destPath = '$workDir/$fileName';
+      final destPath = '$workDir/input/$fileName';
       
       try {
         await file.copy(destPath);
@@ -124,7 +133,6 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     
     _getWorkingDir();
-    print("该死$workDir喵");
     return Scaffold(
       appBar: AppBar(
         titleTextStyle: TextStyle(
