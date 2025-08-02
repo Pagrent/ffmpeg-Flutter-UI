@@ -22,10 +22,6 @@ class ConfirmFile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              Icons.file_present,
-              color: Colors.blueGrey[800],
-            ),
             Text(
               fileName,
               style: TextStyle(
