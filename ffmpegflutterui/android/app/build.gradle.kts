@@ -24,10 +24,12 @@ android {
         applicationId = "com.example.ffmpegflutterui"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        //minSdk = flutter.minSdkVersion
+        minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        applicationId = "top.lolibest.ffmpegflutterui"
     }
 
     buildTypes {
@@ -38,7 +40,8 @@ android {
         }
     }
 
-    compileSdk = 33
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     packagingOptions {
         resources.pickFirsts.add("lib/x86/libc++_shared.so")

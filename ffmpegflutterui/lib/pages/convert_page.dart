@@ -25,7 +25,7 @@ class _ConvertPageState extends State<ConvertPage> {
 
   Widget build(BuildContext context) {
 
-    if(widget.fileList.length == 0)
+    if(widget.fileList.isEmpty)
     {
       return Scaffold(
 
