@@ -9,9 +9,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 class InputPage extends StatefulWidget {
   int selectedFunction;
+  int selectedCategory;
 
   InputPage({
     required this.selectedFunction,
+    required this.selectedCategory,
     super.key
   });
 
@@ -46,17 +48,92 @@ class _InputPageState extends State<InputPage> {
 
   List<File> fileList = [];                                   //文件列表喵
 
-  void pickFile() async {                                     //获取文件喵
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-    if(result != null && result.files.isNotEmpty){
-      setState(() {
-        fileList += result.paths.map((path) => File(path!)).toList();
-      });
+  void pickFile(int sukiCategory) async {                                     //获取文件喵
+    if(sukiCategory == 1) {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.video,
+        allowMultiple: true,
+      );
+      if(result != null && result.files.isNotEmpty){
+        setState(() {
+          fileList += result.paths.map((path) => File(path!)).toList();
+        });
+      }
+    }
+    else {
+      SnackBar(content: Text('Failed to pick file'));
+    }
+if(sukiCategory == 2) {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: true,
+      );
+      if(result != null && result.files.isNotEmpty){
+        setState(() {
+          fileList += result.paths.map((path) => File(path!)).toList();
+        });
+      }
+    }
+    else {
+      SnackBar(content: Text('Failed to pick file'));
+    }
+if(sukiCategory == 3) {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.audio,
+        allowMultiple: true,
+      );
+      if(result != null && result.files.isNotEmpty){
+        setState(() {
+          fileList += result.paths.map((path) => File(path!)).toList();
+        });
+      }
+    }
+    else {
+      SnackBar(content: Text('Failed to pick file'));
+    }
+if(sukiCategory == 4) {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.video,
+        allowMultiple: true,
+      );
+      if(result != null && result.files.isNotEmpty){
+        setState(() {
+          fileList += result.paths.map((path) => File(path!)).toList();
+        });
+      }
     }
     else {
       SnackBar(content: Text('Failed to pick file'));
     }
   }
+
+/*
+  void goToPickFile() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          selectedFormat: _getFormatFromDialogBox,
+          selectedCategory: widget.selectedCategory,
+          addFile: _getFileFromDialogBox,
+        );
+      }
+    );
+  }
+
+  void _getFileFromDialogBox(List<File> newFile) {
+    setState(() {
+      fileList += newFile;
+    });
+  }
+
+  String selectedFormat = "All";
+  void _getFormatFromDialogBox(String sukiFormat) {
+    setState(() {
+      selectedFormat = sukiFormat;
+    });
+  }
+  */
 
   bool isCopying = false;
   double progress = 0;
@@ -131,7 +208,8 @@ class _InputPageState extends State<InputPage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    print("类别${widget.selectedCategory}");
+
     _getWorkingDir();
     return Scaffold(
       appBar: AppBar(
@@ -145,7 +223,9 @@ class _InputPageState extends State<InputPage> {
 
         actions: [
           GestureDetector(
-            onTap: pickFile,
+            onTap: () {
+              return pickFile(widget.selectedCategory);
+            },
             child: Container(
               height: 35,
               width: 60,
@@ -162,7 +242,7 @@ class _InputPageState extends State<InputPage> {
           ),
           IconButton(
             onPressed: () {
-              pickFile();
+              return pickFile(widget.selectedCategory);
             },
             icon: Icon(Icons.add),
           ),

@@ -58,8 +58,9 @@ class _FunctionListState extends State<FunctionList> {
                 dropdownMenuEntries: <DropdownMenuEntry<int>>[
                   DropdownMenuEntry(value: 0, label: "All Functions"),
                   DropdownMenuEntry(value: 1, label: "Video Process"),
-                  DropdownMenuEntry(value: 2, label: "Audio Process"),
-                  DropdownMenuEntry(value: 3, label: "Other Process")
+                  DropdownMenuEntry(value: 2, label: "Picture Process"),
+                  DropdownMenuEntry(value: 3, label: "Audio Process"),
+                  DropdownMenuEntry(value: 4, label: "Other Process")
                 ],
               ),
             ],

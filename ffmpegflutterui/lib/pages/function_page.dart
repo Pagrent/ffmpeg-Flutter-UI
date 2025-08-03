@@ -13,19 +13,6 @@ class FunctionPage extends StatefulWidget {
 
 class _FunctionPageState extends State<FunctionPage> {
 
-/*
-  void goToInput() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => InputPage(
-          selectedFunction: null,
-        )
-      )
-    );
-  }
-*/
-
   int selectedFunction = 0;
 
   @override
@@ -53,12 +40,6 @@ class _FunctionPageState extends State<FunctionPage> {
           ],
         ),
       ),
-      /*
-      floatingActionButton: FloatingActionButton(
-        onPressed: goToInput,
-        child: Icon(Icons.navigate_next),
-      ),
-      */
     );
     
   }
