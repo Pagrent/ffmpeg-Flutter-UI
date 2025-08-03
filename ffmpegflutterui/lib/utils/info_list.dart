@@ -26,6 +26,9 @@ class _InfoListState extends State<InfoList> {
       case 7: return Text("Remove audio from video");
       case 8: return Text("Extract audio from video");
       case 9: return Text("Capture still image from video");
+      case 11: return Text("Convert picture to different format");
+      case 12: return Text("Change picture resolution");
+      case 13: return Text("Rotate picture orientation");
       case 21: return Text("Convert audio to different format");
       case 22: return Text("Change audio encoding format");
       case 23: return Text("Adjust audio volume level");
