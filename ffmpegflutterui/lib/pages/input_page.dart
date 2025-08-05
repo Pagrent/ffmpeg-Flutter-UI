@@ -34,10 +34,10 @@ class _InputPageState extends State<InputPage> {
     if (!await targetDir.exists()) {                            //确保目录存在喵
       await targetDir.create(recursive: true);
     }
-    if (!await inputDir.exists()) {                            //确保目录存在喵
+    if (!await inputDir.exists()) {
       await inputDir.create(recursive: true);
     }
-    if (!await outputDir.exists()) {                            //确保目录存在喵
+    if (!await outputDir.exists()) {
       await outputDir.create(recursive: true);
     }
   
@@ -191,6 +191,8 @@ if(sukiCategory == 4) {
           builder: (context) => ConvertPage(
             fileList: fuckList,
             selectedFunction: widget.selectedFunction,
+            selectedCategory: widget.selectedCategory,
+            workDir: workDir,
           ),
         ),
       );

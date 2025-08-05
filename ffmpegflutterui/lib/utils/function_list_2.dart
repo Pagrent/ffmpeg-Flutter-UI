@@ -72,6 +72,7 @@ class _ShinoListState extends State<ShinoList> {
                 Text(
                   "Video",
                   style: TextStyle(
+                    color: Colors.blueGrey[800],
                     fontSize: 20
                   ),
                 ),
@@ -138,6 +139,7 @@ class _ShinoListState extends State<ShinoList> {
                 Text(
                   "Picture",
                   style: TextStyle(
+                    color: Colors.blueGrey[800],
                     fontSize: 20
                   ),
                 ),
@@ -199,6 +201,7 @@ class _ShinoListState extends State<ShinoList> {
                 Text(
                   "Audio",
                   style: TextStyle(
+                    color: Colors.blueGrey[800],
                     fontSize: 20
                   ),
                 ),
@@ -263,6 +266,7 @@ class _ShinoListState extends State<ShinoList> {
                 Text(
                   "Other",
                   style: TextStyle(
+                    color: Colors.blueGrey[800],
                     fontSize: 20
                   ),
                 ),
@@ -323,6 +327,7 @@ class _ShinoListState extends State<ShinoList> {
               Text(
                 "Function",
                 style: TextStyle(
+                  color: Colors.blueGrey[800],
                   fontSize: 20
                 ),
               ),
@@ -348,12 +353,16 @@ class _ShinoListState extends State<ShinoList> {
                   DropdownMenuEntry(value: 1, label: "Video Format Conversion"),
                   DropdownMenuEntry(value: 2, label: "Video Transcoding"),
                   DropdownMenuEntry(value: 3, label: "Trim Video"),
-                  DropdownMenuEntry(value: 4, label: "Adjust Resolution"),
+                  DropdownMenuEntry(value: 4, label: "Adjust Video Resolution"),
                   DropdownMenuEntry(value: 5, label: "Adjust Framerate"),
                   DropdownMenuEntry(value: 6, label: "Rotate Video"),
                   DropdownMenuEntry(value: 7, label: "Remove Audio Track"),
                   DropdownMenuEntry(value: 8, label: "Extract Audio Track"),
                   DropdownMenuEntry(value: 9, label: "Video Screenshot"),
+
+                  DropdownMenuEntry(value: 11, label: "Picture Format Conversion"),
+                  DropdownMenuEntry(value: 12, label: "Adjust Picture Resolution"),
+                  DropdownMenuEntry(value: 13, label: "Rotate Picture"),
               
                   DropdownMenuEntry(value: 21, label: "Audio Format Convertion"),
                   DropdownMenuEntry(value: 22, label: "Audio Transcoding"),
