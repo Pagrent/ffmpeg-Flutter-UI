@@ -39,6 +39,7 @@ class _FunctionListState extends State<FunctionList> {
               Text(
                 "Category",
                 style: TextStyle(
+                  color: Colors.blueGrey[800],
                   fontSize: 20
                 ),
               ),
