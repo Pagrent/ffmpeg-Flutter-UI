@@ -184,7 +184,7 @@ if(sukiCategory == 4) {
   }
 
   void goToConvert(List<File> fuckList) {
-    if(fileList.isNotEmpty){
+    if(fileList.isEmpty){
       Navigator.push(
         context,
         MaterialPageRoute(
