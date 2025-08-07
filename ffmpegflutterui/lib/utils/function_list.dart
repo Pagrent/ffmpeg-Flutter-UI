@@ -25,7 +25,6 @@ class _FunctionListState extends State<FunctionList> {
       children: [
         
         Container(
-          height: 120,
           width: MediaQuery.of(context).size.width / 2 + 35,
           decoration: BoxDecoration(
             color: Colors.deepPurple[100],
@@ -64,6 +63,7 @@ class _FunctionListState extends State<FunctionList> {
                   DropdownMenuEntry(value: 4, label: "Other Process")
                 ],
               ),
+              SizedBox(height: 15,)
             ],
           ),
         ),

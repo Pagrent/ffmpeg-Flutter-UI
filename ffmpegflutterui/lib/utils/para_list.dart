@@ -73,7 +73,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -112,6 +111,7 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".ogv", label: ".ogv"),
                     ]
                   ),
+                  SizedBox(height: 15,),
                 ],
               )
             ),
@@ -122,7 +122,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -162,12 +161,12 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: "mjpeg", label: "MJPEG"),
                     ]
                   ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
             SizedBox(height: 25,),
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -206,7 +205,7 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".ogv", label: ".ogv"),
                     ]
                   ),
-                  
+                  SizedBox(height: 15,),
                 ],
               )
             ),
@@ -217,7 +216,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 220,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -227,7 +225,7 @@ class _YoKiState extends State<YoKi> {
                 children: [
                   SizedBox(height: 10,),
                   Text(
-                    "Choose Two of: Start Time / End Time / Duration",
+                    "Start Time / End Time / Duration",
                     style: TextStyle(
                       color: Colors.blueGrey[800],
                       fontSize: 20,
@@ -238,6 +236,7 @@ class _YoKiState extends State<YoKi> {
                     width: MediaQuery.of(context).size.width / 2,
                     child: TimeInputComponent(onTimeChanged: onTimeChanged)
                   ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
@@ -248,7 +247,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 170,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -302,6 +300,7 @@ class _YoKiState extends State<YoKi> {
                       ],
                     ),
                   ),
+                  SizedBox(height: 15,),
                 ],
               ),
             )
@@ -312,7 +311,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -345,7 +343,8 @@ class _YoKiState extends State<YoKi> {
                         });
                       },
                     ),
-                  )
+                  ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
@@ -356,7 +355,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -389,7 +387,8 @@ class _YoKiState extends State<YoKi> {
                         });
                       },
                     ),
-                  )
+                  ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
@@ -400,7 +399,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 50,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -427,7 +425,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -466,6 +463,7 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".opus", label: ".opus"),
                     ]
                   ),
+                  SizedBox(height: 15,),
                 ],
               )
             ),
@@ -476,7 +474,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -497,12 +494,12 @@ class _YoKiState extends State<YoKi> {
                     width: MediaQuery.of(context).size.width / 2,
                     child: TimePointInputComponent(onTimePointChanged: onTimePointChanged)
                   ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
             SizedBox(height: 25,),
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -543,6 +540,7 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".pam", label: ".pam"),
                     ]
                   ),
+                  SizedBox(height: 15,),
                 ],
               )
             ),
@@ -553,7 +551,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -594,6 +591,7 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".pam", label: ".pam"),
                     ]
                   ),
+                  SizedBox(height: 15,),
                 ],
               )
             ),
@@ -604,7 +602,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 170,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -637,7 +634,6 @@ class _YoKiState extends State<YoKi> {
                             setState(() {
                               resolutionH = value;
                               widget.resolution("${resolutionH}x$resolutionW");
-                              print("${resolutionH}x$resolutionW");
                             });
                           },
                         ),
@@ -653,13 +649,13 @@ class _YoKiState extends State<YoKi> {
                             setState(() {
                               resolutionW = value;
                               widget.resolution("${resolutionH}x$resolutionW");
-                              print("${resolutionH}x$resolutionW");
                             });
                           },
                         )
                       ],
                     ),
                   ),
+                  SizedBox(height: 15,),
                 ],
               ),
             )
@@ -670,7 +666,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -703,7 +698,8 @@ class _YoKiState extends State<YoKi> {
                         });
                       },
                     ),
-                  )
+                  ),
+                  SizedBox(height: 15,),
                 ],
               ),
             ),
@@ -714,7 +710,6 @@ class _YoKiState extends State<YoKi> {
         return Column(
           children: [
             Container(
-              height: 120,
               width: MediaQuery.of(context).size.width / 2 + 35,
               decoration: BoxDecoration(
                 color: Colors.deepPurple[100],
@@ -753,6 +748,395 @@ class _YoKiState extends State<YoKi> {
                       DropdownMenuEntry(value: ".opus", label: ".opus"),
                     ]
                   ),
+                  SizedBox(height: 15,),
+                ],
+              )
+            ),
+          ],
+        );
+
+      case 22:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Output Encoding Format",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  DropdownMenu(
+                    enableFilter: true,
+                    width: MediaQuery.of(context).size.width / 2,
+                    onSelected: (sukiFormat) {
+                      if(sukiFormat != null) {
+                        setState(() {
+                          widget.outputEncodingFormat(sukiFormat);
+                        });
+                      }
+                    },
+                    dropdownMenuEntries: <DropdownMenuEntry<String>> [
+                      DropdownMenuEntry(value: "libmp3lame", label: "MP3"),
+                      DropdownMenuEntry(value: "aac", label: "AAC"),
+                      DropdownMenuEntry(value: "flac", label: "FLAC"),
+                      DropdownMenuEntry(value: "libopus", label: "Opus"),
+                      DropdownMenuEntry(value: "libvorbis", label: "Vorbits"),
+                      DropdownMenuEntry(value: "pcm_s16le", label: "PCM"),
+                      DropdownMenuEntry(value: "ac3", label: "AC3"),
+                    ]
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+            SizedBox(height: 25,),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Output Format",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  DropdownMenu(
+                    enableFilter: true,
+                    width: MediaQuery.of(context).size.width / 2,
+                    onSelected: (sukiFormat) {
+                      if(sukiFormat != null) {
+                        setState(() {
+                          widget.outputFormat(sukiFormat);
+                        });
+                      }
+                    },
+                    dropdownMenuEntries: <DropdownMenuEntry<String>> [
+                      DropdownMenuEntry(value: ".mp3", label: ".mp3"),
+                      DropdownMenuEntry(value: ".aac", label: ".aac"),
+                      DropdownMenuEntry(value: ".m4a", label: ".m4a"),
+                      DropdownMenuEntry(value: ".wav", label: ".wav"),
+                      DropdownMenuEntry(value: ".aiff", label: ".aiff"),
+                      DropdownMenuEntry(value: ".aif", label: ".aif"),
+                      DropdownMenuEntry(value: ".flac", label: ".flac"),
+                      DropdownMenuEntry(value: ".ogg", label: ".ogg"),
+                      DropdownMenuEntry(value: ".opus", label: ".opus"),
+                    ]
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              )
+            ),
+          ],
+        );
+
+      case 23:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Magnification",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "Magnification",
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          widget.volumeMultiplier(value);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 24:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Start Time / End Time / Duration",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TimeInputComponent(onTimeChanged: onTimeChanged)
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 25:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Sample Rate",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "Sample Rate",
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          widget.audioSampleRate(value);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 26:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Channel Count",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "Channel Count",
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          widget.audioChannelCount(value);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 31:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Frame Rate",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "FrameRate",
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          widget.frameRate(value);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+          ],
+        );
+
+      case 32:
+        return Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Frame Rate",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        hintText: "FrameRate",
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          widget.frameRate(value);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ),
+            SizedBox(height: 25,),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Output Format",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  DropdownMenu(
+                    enableFilter: true,
+                    width: MediaQuery.of(context).size.width / 2,
+                    onSelected: (sukiFormat) {
+                      if(sukiFormat != null) {
+                        setState(() {
+                          widget.outputFormat(sukiFormat);
+                        });
+                      }
+                    },
+                    dropdownMenuEntries: <DropdownMenuEntry<String>> [
+                      DropdownMenuEntry(value: ".png", label: ".png"),
+                      DropdownMenuEntry(value: ".jpg", label: ".jpg"),
+                      DropdownMenuEntry(value: ".jpeg", label: ".jpeg"),
+                      DropdownMenuEntry(value: ".bmp", label: ".bmp"),
+                      DropdownMenuEntry(value: ".tiff", label: ".tiff"),
+                      DropdownMenuEntry(value: ".tif", label: ".tif"),
+                      DropdownMenuEntry(value: ".webp", label: ".webp"),
+                      DropdownMenuEntry(value: ".dpx", label: ".dpx"),
+                      DropdownMenuEntry(value: ".pgm", label: ".pgm"),
+                      DropdownMenuEntry(value: ".ppm", label: ".ppm"),
+                      DropdownMenuEntry(value: ".pam", label: ".pam"),
+                    ]
+                  ),
+                  SizedBox(height: 15,),
                 ],
               )
             ),

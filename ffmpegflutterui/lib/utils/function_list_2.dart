@@ -58,7 +58,6 @@ class _ShinoListState extends State<ShinoList> {
       return Column(
         children: [
           Container(
-            height: 120,
             width: MediaQuery.of(context).size.width / 2 + 35,
             decoration: BoxDecoration(
               color: Colors.deepPurple[100],
@@ -106,6 +105,7 @@ class _ShinoListState extends State<ShinoList> {
                     DropdownMenuEntry(value: 9, label: "Video Screenshot"),
                   ],
                 ),
+                SizedBox(height: 15,),
               ],
             ),
           ),
@@ -125,7 +125,6 @@ class _ShinoListState extends State<ShinoList> {
       return Column(
         children: [
           Container(
-            height: 120,
             width: MediaQuery.of(context).size.width / 2 + 35,
             decoration: BoxDecoration(
               color: Colors.deepPurple[100],
@@ -167,6 +166,7 @@ class _ShinoListState extends State<ShinoList> {
                     DropdownMenuEntry(value: 13, label: "Rotate Picture"),
                   ],
                 ),
+                SizedBox(height: 15,),
               ],
             ),
           ),
@@ -187,7 +187,6 @@ class _ShinoListState extends State<ShinoList> {
       return Column(
         children: [
           Container(
-            height: 120,
             width: MediaQuery.of(context).size.width / 2 + 35,
             decoration: BoxDecoration(
               color: Colors.deepPurple[100],
@@ -232,6 +231,7 @@ class _ShinoListState extends State<ShinoList> {
                     DropdownMenuEntry(value: 26, label: "Adjust Channel Count"),
                   ],
                 ),
+                SizedBox(height: 15,),
               ],
             ),
           ),
@@ -252,7 +252,6 @@ class _ShinoListState extends State<ShinoList> {
       return Column(
         children: [
           Container(
-            height: 120,
             width: MediaQuery.of(context).size.width / 2 + 35,
             decoration: BoxDecoration(
               color: Colors.deepPurple[100],
@@ -293,6 +292,7 @@ class _ShinoListState extends State<ShinoList> {
                     DropdownMenuEntry(value: 32, label: "Extract Video Frames"),
                   ],
                 ),
+                SizedBox(height: 15,),
               ],
             ),
           ),
@@ -313,7 +313,6 @@ class _ShinoListState extends State<ShinoList> {
     return Column(
       children: [
         Container(
-          height: 120,
           width: MediaQuery.of(context).size.width / 2 + 35,
           decoration: BoxDecoration(
             color: Colors.deepPurple[100],
@@ -375,6 +374,7 @@ class _ShinoListState extends State<ShinoList> {
                   DropdownMenuEntry(value: 32, label: "Extract Video Frames"),
                 ],
               ),
+              SizedBox(height: 15,),
             ],
           ),
         ),
