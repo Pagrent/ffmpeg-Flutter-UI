@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_new/return_code.dart';
 import 'package:ffmpegflutterui/utils/confirm_file.dart';
 import 'package:ffmpegflutterui/utils/file_list.dart';
 import 'package:ffmpegflutterui/utils/para_list.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:process_run/shell.dart';
 
 class ConvertPage extends StatefulWidget {
   final List<File> fileList;
@@ -41,106 +44,195 @@ class _ConvertPageState extends State<ConvertPage> {
   String? rotateAngle;          //旋转角度
   String? timePoint;            //时间点
 
+  String? finalCommand;
+  String? currentTime;
+
+  void getCurrentTime() {
+    currentTime = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
+  }
+  Future<void> createTimeDir() async {
+    await Directory('${widget.outPath}/$currentTime').create(recursive: true);
+  }
+
   void _outFormatFromYoKi(String? outFormat) {
     setState(() {
       outputFormat = outFormat;
     });
   }
-
   void _outEncodingFormatFromYoKi(String? outEncodingFormat) {
     setState(() {
       outputEncodingFormat = outEncodingFormat;
     });
   }
-
   void _outSampleRateFromYoKi(String? outSampleRate) {
     setState(() {
       audioSampleRate = outSampleRate;
     });
   }
-
   void _outChannelCountFromYoKi(String? outChannelCount) {
     setState(() {
       audioChannelCount = outChannelCount;
     });
   }
-
   void _outMultiplierFromYoKi(String? outMultiplier) {
     setState(() {
       volumeMultiplier = outMultiplier;
     });
   }
-
   void _outStartTimeFromYoKi(String? outStartTime) {
     setState(() {
       startTime = outStartTime;
     });
   }
-
   void _outEndTimeFromYoKi(String? outEndTime) {
     setState(() {
       endTime = outEndTime;
     });
   }
-
   void _outDurationFromYoKi(String? outDuration) {
     setState(() {
       duration = outDuration;
     });
   }
-
   void _outResolutionFromYoKi(String? outResolution) {
     setState(() {
       resolution = outResolution;
     });
   }
-
   void _outFrameRateFromYoKi(String? outFrameRate) {
     setState(() {
       frameRate = outFrameRate;
     });
   }
-
   void _outRotateAngleFromYoKi(String? outRotateAngle) {
     setState(() {
       rotateAngle = outRotateAngle;
     });
   }
-
   void _outTimePointFromYoKi(String? outTimePoint) {
     setState(() {
       timePoint = outTimePoint;
     });
   }
 
-  Future<void> convertUnit(File file) async {
+  void getCommand(File file) {
     final fileFullName = file.path.split('/').last;
     final fileName = fileFullName.split('.').first;
-    final inputFormat = fileFullName.split('.').last;
-    final String? outputFormat;
+    final fileFormat = fileFullName.split('.').last;
+    switch (widget.selectedFunction) {
+      case 1:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" "${widget.outPath}/$fileName.ConvertFormat.$outputFormat"';
+      case 2:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -c:v $outputEncodingFormat "${widget.outPath}/$fileName.Transcoding-$outputEncodingFormat.$outputFormat"';
+      case 3:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ss $startTime -to $endTime "${widget.outPath}/$fileName.Trim.$fileFormat"';
+      case 4:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -s $resolution "${widget.outPath}/$fileName.AdjustResolution-$resolution.$fileFormat"';
+      case 5:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -r $frameRate "${widget.outPath}/$fileName.AdjustFPS-$frameRate.$fileFormat"';
+      case 6:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -vf "rotate=$rotateAngle*PI/180,pad=width=ceil(iw/2)*2:height=ceil(ih/2)*2" -c:a copy "${widget.outPath}/$fileName.Rotate-$rotateAngle.$fileFormat"';
+      case 7:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -an "${widget.outPath}/$fileName.RemoveAudio.$fileFormat"';
+      case 8:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a copy "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+      case 9:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ss $timePoint -vframes 1 "${widget.outPath}/$fileName.ScreenShot.$outputFormat"';
+      case 11:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" "${widget.outPath}/$fileName.ConvertFormat.$outputFormat"';
+      case 12:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -s $resolution "${widget.outPath}/$fileName.AdjustResolution-$resolution.$fileFormat"';
+      case 13:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -vf "rotate=$rotateAngle*PI/180" "${widget.outPath}/$fileName.Rotate-$rotateAngle.$fileFormat"';
+      case 21:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" "${widget.outPath}/$fileName.ConvertFormat.$outputFormat"';
+      case 22:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -c:a $outputEncodingFormat "${widget.outPath}/$fileName.Transcoding.$outputFormat"';
+      case 23:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -af volume=$volumeMultiplier "${widget.outPath}/$fileName.AdjustVolume-${volumeMultiplier}x.$fileFormat"';
+      case 24:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ss $startTime -to $endTime "${widget.outPath}/$fileName.Trim.$fileFormat"';
+      case 25:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ar $audioSampleRate "${widget.outPath}/$fileName.ConvertSampleRate-$audioSampleRate.$fileFormat"';
+      case 26:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ac $audioChannelCount "${widget.outPath}/$fileName.AdjustChannelCount-$audioChannelCount.$outputFormat"';
+      case 31:
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -vf "fps=$frameRate" -loop 0 "${widget.outPath}/$fileName.VideoToGIF.gif"';
+      case 32:
+        getCurrentTime();
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -r $frameRate "${widget.outPath}/ExtractFrame$currentTime/$fileName.ExtractFrame%03d.$outputFormat"';
+    }
+    print(finalCommand);
+  }
 
-    
+  List<String> splitCommand(String command) {
+    final regex = RegExp(r'"[^"]+"|\S+');
+    return regex
+        .allMatches(command)
+        .map((m) => m.group(0)!)
+        .toList();
+  }
+
+  Future<void> convertUnit(File file) async {
+    getCommand(file);
     if (Platform.isLinux || Platform.isWindows) {
+
+      List<String> args = splitCommand(finalCommand!);
       final executable = Platform.isWindows ? 'ffmpeg.exe' : 'ffmpeg';
-      final result = await Process.run(
-        executable,
-        [
-          '-i', '${widget.inPath}/$fileFullName',
-          '-c:v', 'copy',
-          '-c:a', 'copy',
-          '${widget.outPath}/$fileName.mp4'
-        ],
-        runInShell: Platform.isWindows,
-      );
-      print('输出: ${result.stdout}');
-      if (result.stderr != null && result.stderr.isNotEmpty) {
-        print('错误: ${result.stderr}');
+      var shell = new Shell();
+      //final result = await Process.run(executable, args, runInShell: Platform.isWindows, workingDirectory: '/',);
+      args = ['ffmpeg', ...args];
+
+      try {
+
+        final result = await shell.run('/usr/bin/ffmpeg $finalCommand');
+
+        // print('STDOUT: ${result.stdout}');
+        // print('STDERR: ${result.stderr}');
+        // print('EXITCODE: ${result.exitCode}');
+
+        for(var processResult in result) {
+          print('STDOUT: ${processResult.stdout}');
+          print('STDERR: ${processResult.stderr}');
+          print('EXIT CODE: ${processResult.exitCode}');
+        }
+
+      } catch(e) {
+        print('catch(e): $e');
       }
-      print('退出码: ${result.exitCode}');
+      
+      // for(int i = 0; i < args.length; i++) {
+      //   print("第$i: ${args[i]}");
+      // }
+
+      // print('输出: ${result.stdout}');
+      // if (result.stderr != null && result.stderr.isNotEmpty) {
+      //   print('错误: ${result.stderr}');
+      // }
+      
+      // print('退出码: ${result.exitCode}');
+    }
+
+    else if(Platform.isAndroid || Platform.isIOS ||Platform.isMacOS) {
+      try {
+        final session = await FFmpegKit.execute(finalCommand!);
+        final returnCode = await session.getReturnCode();
+      
+        if (ReturnCode.isSuccess(returnCode)) {
+          print('转换成功！');
+        } else if (ReturnCode.isCancel(returnCode)) {
+          print('操作取消');
+        } else {
+          print('转换失败: ${await session.getFailStackTrace()}');
+        }
+      } catch (e) {
+        print('发生异常: $e');
+      }
     }
   }
 
   void startConvert() {
+
     for(int i = 0; i < widget.fileList.length; i++) {
       final file = widget.fileList[i];
       
