@@ -273,7 +273,7 @@ class _YoKiState extends State<YoKi> {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
-                            hintText: "Height",
+                            hintText: "Width",
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -288,7 +288,7 @@ class _YoKiState extends State<YoKi> {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
-                            hintText: "Width",
+                            hintText: "Height",
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -628,7 +628,7 @@ class _YoKiState extends State<YoKi> {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
-                            hintText: "Height",
+                            hintText: "Width",
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -643,7 +643,7 @@ class _YoKiState extends State<YoKi> {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
-                            hintText: "Width",
+                            hintText: "Height",
                           ),
                           onChanged: (value) {
                             setState(() {
