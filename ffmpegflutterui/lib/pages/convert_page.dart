@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_flutter_new/return_code.dart';
-import 'package:ffmpegflutterui/utils/confirm_file.dart';
 import 'package:ffmpegflutterui/utils/file_list.dart';
 import 'package:ffmpegflutterui/utils/para_list.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,20 @@ class _ConvertPageState extends State<ConvertPage> {
 
   String? finalCommand;
   String? currentTime;
+
+  String currentFileName = "Initializing";
+  int total = 0;
+  int success = 0;
+  int finished = 0;
+  int failed = 0;
+
+  List<bool> fileStatus = [];
+
+  void fileStatusInit() {
+    for(int i = 0; i < 100; i++) {
+      fileStatus.add(false);
+    }
+  }
 
   void getCurrentTime() {
     currentTime = DateFormat('yyyyMMddHHmmss').format(DateTime.now());
@@ -173,44 +186,35 @@ class _ConvertPageState extends State<ConvertPage> {
         .toList();
   }
 
-  Future<void> convertUnit(File file) async {
+  Future<void> convertUnit(File file, int num) async {
+    setState(() {
+      currentFileName = file.path.split('/').last;
+    });
     getCommand(file);
-    if (Platform.isLinux || Platform.isWindows) {
-
-      List<String> args = splitCommand(finalCommand!);
-      final executable = Platform.isWindows ? 'ffmpeg.exe' : 'ffmpeg';
+    if (Platform.isLinux) {
+      bool status = false;
       var shell = new Shell();
-      //final result = await Process.run(executable, args, runInShell: Platform.isWindows, workingDirectory: '/',);
-      args = ['ffmpeg', ...args];
-
       try {
-
         final result = await shell.run('/usr/bin/ffmpeg $finalCommand');
-
-        // print('STDOUT: ${result.stdout}');
-        // print('STDERR: ${result.stderr}');
-        // print('EXITCODE: ${result.exitCode}');
-
         for(var processResult in result) {
           print('STDOUT: ${processResult.stdout}');
           print('STDERR: ${processResult.stderr}');
           print('EXIT CODE: ${processResult.exitCode}');
+          if(processResult.exitCode == 0) {
+            setState(() {
+              success++;
+              status = true;
+            });
+          }
         }
-
       } catch(e) {
         print('catch(e): $e');
       }
-      
-      // for(int i = 0; i < args.length; i++) {
-      //   print("第$i: ${args[i]}");
-      // }
-
-      // print('输出: ${result.stdout}');
-      // if (result.stderr != null && result.stderr.isNotEmpty) {
-      //   print('错误: ${result.stderr}');
-      // }
-      
-      // print('退出码: ${result.exitCode}');
+      setState(() {
+        finished++;
+        failed = finished - success;
+        fileStatus[num] = status;
+      });
     }
 
     else if(Platform.isAndroid || Platform.isIOS ||Platform.isMacOS) {
@@ -236,7 +240,7 @@ class _ConvertPageState extends State<ConvertPage> {
     for(int i = 0; i < widget.fileList.length; i++) {
       final file = widget.fileList[i];
       
-      convertUnit(file);
+      convertUnit(file, i);
     }
 
     print("结束");
@@ -245,6 +249,8 @@ class _ConvertPageState extends State<ConvertPage> {
   @override
 
   Widget build(BuildContext context) {
+    total = widget.fileList.length;
+    fileStatusInit();
     return Scaffold(
 
       appBar: AppBar(
@@ -277,13 +283,98 @@ class _ConvertPageState extends State<ConvertPage> {
               rotateAngle: _outRotateAngleFromYoKi,
               timePoint: _outTimePointFromYoKi,
             ),
+            SizedBox(height: 25,),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll<Color>(Colors.deepPurple.shade50),
+              ),
+              onPressed: startConvert,
+              child: Text(
+                "Run",
+                style: TextStyle(
+                  fontSize: 15
+                ),
+              ),
+            ),
+            SizedBox(height: 15,),
+            Container(
+              width: MediaQuery.of(context).size.width / 2 + 35,
+              decoration: BoxDecoration(
+                color: Colors.deepPurple[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 10,),
+                  Text(
+                    "Progress",
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Column(
+                      children: [
+                        Text(currentFileName),
+                        LinearProgressIndicator(
+                          
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.cancel,
+                                  color: Colors.red[700],
+                                ),
+                                Text('$failed'),
+                              ],
+                            ),
+                            SizedBox(width: MediaQuery.of(context).size.width / 8,),
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                ),
+                                Text('$success'),
+                              ],
+                            ),
+                            SizedBox(width: MediaQuery.of(context).size.width / 8,),
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.trip_origin,
+                                  color: Colors.blue,
+                                ),
+                                Text('$total'),
+                              ],
+                            ),
+                          ],
+                        ),
+                        LinearProgressIndicator(
+                          value: (finished)/total,
+                        ),
+                        SizedBox(height: 20,),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
 
       floatingActionButton: FloatingActionButton(
+        
         onPressed: () {
-          startConvert();
+          
         },
         child: Icon(Icons.navigate_next),
       ),
