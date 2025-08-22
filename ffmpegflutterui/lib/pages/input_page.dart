@@ -200,7 +200,7 @@ if(sukiCategory == 4) {
     else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Press the Add Button at Top Right Corner to Select File")
+          content: Text("Press the Add Button at Top Right Corner to Select File.")
         )
       );
     }
