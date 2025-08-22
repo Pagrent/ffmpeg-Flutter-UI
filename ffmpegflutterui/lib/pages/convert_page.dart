@@ -1,7 +1,9 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
 import 'package:ffmpeg_kit_flutter_new/return_code.dart';
+import 'package:ffmpegflutterui/pages/result_page.dart';
 import 'package:ffmpegflutterui/utils/file_list.dart';
 import 'package:ffmpegflutterui/utils/para_list.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +54,10 @@ class _ConvertPageState extends State<ConvertPage> {
   int finished = 0;
   int failed = 0;
 
+  bool pressedRun = false;
+
   List<bool> fileStatus = [];
+  List<String> generatedFile = [];
 
   void fileStatusInit() {
     for(int i = 0; i < 100; i++) {
@@ -126,6 +131,27 @@ class _ConvertPageState extends State<ConvertPage> {
     setState(() {
       timePoint = outTimePoint;
     });
+  }
+
+  void goToResult(List<bool> status, List<File> fuckList) {
+    if(finished == total) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultPage(
+            fileList: fuckList,
+            fileStatus: status,
+          )
+        )
+      );
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Please wait for the process to finish.")
+        )
+      );
+    }
   }
 
   void getCommand(File file) {
@@ -237,10 +263,19 @@ class _ConvertPageState extends State<ConvertPage> {
 
   void startConvert() {
 
-    for(int i = 0; i < widget.fileList.length; i++) {
-      final file = widget.fileList[i];
-      
-      convertUnit(file, i);
+    if (pressedRun == false) {
+      pressedRun = true;
+      for(int i = 0; i < widget.fileList.length; i++) {
+        final file = widget.fileList[i];
+        convertUnit(file, i);
+      }
+    }
+    else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Do not press the button multiple times.")
+        )
+      );
     }
 
     print("结束");
@@ -374,7 +409,7 @@ class _ConvertPageState extends State<ConvertPage> {
       floatingActionButton: FloatingActionButton(
         
         onPressed: () {
-          
+          goToResult(fileStatus, widget.fileList);
         },
         child: Icon(Icons.navigate_next),
       ),

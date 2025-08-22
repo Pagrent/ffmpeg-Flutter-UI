@@ -39,7 +39,7 @@ class _PlatformPageState extends State<PlatformPage> {
 
     //ConvertPage(),
 
-    ResultPage(),
+    //ResultPage(),
 
     SettingsPage(),
   ];
@@ -58,11 +58,6 @@ class _PlatformPageState extends State<PlatformPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.functions),
             label: "Choose Function",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.output),
-            label: "Output File",
           ),
 
           BottomNavigationBarItem(
