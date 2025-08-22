@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:ffmpegflutterui/pages/function_page.dart';
 import 'package:ffmpegflutterui/utils/file_result.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class ResultPage extends StatefulWidget {
   final List<bool> fileStatus;
@@ -30,6 +29,16 @@ class _ResultPageState extends State<ResultPage> {
     return null;
   }
 
+  void goToHome() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FunctionPage(
+        )
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +62,12 @@ class _ResultPageState extends State<ResultPage> {
             isSuccess: widget.fileStatus[index],
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          goToHome();
+        },
+        child: Icon(Icons.home),
       ),
     );
   }

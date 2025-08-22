@@ -23,18 +23,18 @@ class FileResult extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Text(
-                fileName,
-                style: TextStyle(
-                  color: Colors.blueGrey[800],
-                  fontSize: 18,
+              Flexible(
+                child: Container(
+                  child: Text(
+                    fileName,
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
-              Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.download),
-              )
+              Icon(Icons.done)
             ],
           ),
         ),
@@ -50,14 +50,17 @@ class FileResult extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Text(
-              fileName,
-              style: TextStyle(
-                color: Colors.blueGrey[800],
-                fontSize: 18,
+            Flexible(
+              child: Container(
+                child: Text(
+                  fileName,
+                  style: TextStyle(
+                    color: Colors.blueGrey[800],
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
-            Spacer(),
             Icon(Icons.cancel)
           ],
         ),

@@ -29,7 +29,10 @@ class _InputPageState extends State<InputPage> {
     final dir = await getApplicationDocumentsDirectory();
     final targetDir = Directory('${dir.path}/FFmpegFlutterUI');
     final inputDir = Directory('${targetDir.path}/input');
-    final outputDir = Directory('${targetDir.path}/output');
+    var outputDir = Directory('${targetDir.path}/output');
+    if(Platform.isAndroid) {
+      outputDir = Directory('/storage/emulated/0/Download/FFmpegFlutterUI');
+    }
   
     if (!await targetDir.exists()) {                            //确保目录存在喵
       await targetDir.create(recursive: true);

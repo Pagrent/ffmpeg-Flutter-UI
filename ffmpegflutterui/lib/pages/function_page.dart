@@ -19,6 +19,7 @@ class _FunctionPageState extends State<FunctionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           titleTextStyle: TextStyle(
             color: Colors.blueGrey[800],
             fontSize: 30,
