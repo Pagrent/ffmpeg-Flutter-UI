@@ -16,7 +16,7 @@ class ConvertPage extends StatefulWidget {
   final int selectedCategory;
   final String? workDir;
   late final inPath = '$workDir/input';
-  late final outPath = '$workDir/output';
+  late String outPath = '$workDir/output';
 
   ConvertPage({
     required this.fileList,
@@ -155,6 +155,9 @@ class _ConvertPageState extends State<ConvertPage> {
   }
 
   void getCommand(File file) {
+    if(Platform.isAndroid) {
+      widget.outPath = "/storage/emulated/0/Download/FFmpegFlutterUI";
+    }
     final fileFullName = file.path.split('/').last;
     final fileName = fileFullName.split('.').first;
     final fileFormat = fileFullName.split('.').last;
@@ -174,9 +177,26 @@ class _ConvertPageState extends State<ConvertPage> {
       case 7:
         finalCommand = '-i "${widget.inPath}/$fileFullName" -an "${widget.outPath}/$fileName.RemoveAudio.$fileFormat"';
       case 8:
-        finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a copy "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        if(outputFormat == "mp3") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a libmp3lame "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
+        if(outputFormat == "aac" || outputFormat == "m4a") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a aac "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
+        if(outputFormat == "wav" || outputFormat == "aiff" || outputFormat == "aif") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a pcm_s16le "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
+        if(outputFormat == "flac") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a flac "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
+        if(outputFormat == "ogg") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a libvorbits "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
+        if(outputFormat == "opus") {
+          finalCommand = '-i "${widget.inPath}/$fileFullName" -vn -c:a libopus "${widget.outPath}/$fileName.ExtractAudio.$outputFormat"';
+        }
       case 9:
-        finalCommand = '-i "${widget.inPath}/$fileFullName" -ss $timePoint -vframes 1 "${widget.outPath}/$fileName.ScreenShot.$outputFormat"';
+        finalCommand = '-i "${widget.inPath}/$fileFullName" -ss $timePoint -vframes 1 "${widget.outPath}/$fileName.ScreenShot-$timePoint.$outputFormat"';
       case 11:
         finalCommand = '-i "${widget.inPath}/$fileFullName" "${widget.outPath}/$fileName.ConvertFormat.$outputFormat"';
       case 12:
@@ -244,20 +264,37 @@ class _ConvertPageState extends State<ConvertPage> {
     }
 
     else if(Platform.isAndroid || Platform.isIOS ||Platform.isMacOS) {
+      bool status = false;
       try {
         final session = await FFmpegKit.execute(finalCommand!);
         final returnCode = await session.getReturnCode();
       
         if (ReturnCode.isSuccess(returnCode)) {
-          print('转换成功！');
+          setState(() {
+            print('转换成功！');
+            success++;
+            finished++;
+            status = true;
+          });
         } else if (ReturnCode.isCancel(returnCode)) {
-          print('操作取消');
+          setState(() {
+            print('操作取消');
+            failed++;
+            finished++;
+            status = false;
+          });
         } else {
-          print('转换失败: ${await session.getFailStackTrace()}');
+          setState(() async {
+            print('转换失败: ${await session.getFailStackTrace()}');
+            failed++;
+            finished++;
+            status = false;
+          });
         }
       } catch (e) {
         print('发生异常: $e');
       }
+      fileStatus[num] = status;
     }
   }
 

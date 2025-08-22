@@ -49,24 +49,24 @@ class _PlatformPageState extends State<PlatformPage> {
     return Scaffold(
       body: _pages[_selectedIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.deepPurple[100],
-        currentIndex: _selectedIndex,
-        onTap: _navigateBottomBar,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.functions),
-            label: "Choose Function",
-          ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   backgroundColor: Colors.deepPurple[100],
+      //   currentIndex: _selectedIndex,
+      //   onTap: _navigateBottomBar,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.functions),
+      //       label: "Choose Function",
+      //     ),
 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.settings),
+      //       label: "Settings",
+      //     ),
 
-        ],
-      ),
+      //   ],
+      // ),
     );
   }
 }

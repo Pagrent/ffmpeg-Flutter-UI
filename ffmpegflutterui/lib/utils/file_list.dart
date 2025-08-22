@@ -41,11 +41,15 @@ class FileList extends StatelessWidget {
                 Icons.file_present,
                 color: Colors.blueGrey[800],
               ),
-              Text(
-                fileName,
-                style: TextStyle(
-                  color: Colors.blueGrey[800],
-                  fontSize: 18,
+              Flexible(
+                child: Container(
+                  child: Text(
+                    fileName,
+                    style: TextStyle(
+                      color: Colors.blueGrey[800],
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
             ],
