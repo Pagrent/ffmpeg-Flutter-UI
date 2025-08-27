@@ -1,0 +1,28 @@
+display_name: FFmpeg Flutter UI
+
+icon: assets/logo.png
+
+keywords:
+  - Media
+  - Video
+  - Music
+  - Picture
+
+generic_name: FFmpeg Flutter UI
+
+actions: []
+
+categories:
+  - Music
+
+startup_notify: true
+
+# 您可以指定要与您的应用捆绑的  共享库
+#
+# fastforge 会自动检测您的应用所依赖的共享库，但您也可以在此处手动指定它们。
+#
+# 以下示例展示了如何将 libcurl 库与您的应用捆绑在一起
+#
+# include:
+#   - libcurl.so.4
+include: []

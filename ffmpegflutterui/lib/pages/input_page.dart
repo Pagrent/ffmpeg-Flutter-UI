@@ -24,92 +24,104 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   String? workDir;
+  bool isLoading = true;
 
-  Future<void> _getWorkingDir() async {                       //获取工作目录喵
-    final dir = await getApplicationDocumentsDirectory();
-    final targetDir = Directory('${dir.path}/FFmpegFlutterUI');
-    final inputDir = Directory('${targetDir.path}/input');
-    var outputDir = Directory('${targetDir.path}/output');
-    if(Platform.isAndroid) {
-      outputDir = Directory('/storage/emulated/0/Download/FFmpegFlutterUI');
+  Future<void> _getWorkingDir() async {
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final targetDir = Directory('${dir.path}/FFmpegFlutterUI');
+      final inputDir = Directory('${targetDir.path}/input');
+      var outputDir = Directory('${targetDir.path}/output');
+      if (Platform.isAndroid) {
+        outputDir = Directory('/storage/emulated/0/Download/FFmpegFlutterUI');
+      }
+
+      if (!await targetDir.exists()) {
+        await targetDir.create(recursive: true);
+      }
+      if (!await inputDir.exists()) {
+        await inputDir.create(recursive: true);
+      }
+      if (!await outputDir.exists()) {
+        await outputDir.create(recursive: true);
+      }
+
+      setState(() {
+        workDir = targetDir.path;
+        isLoading = false;
+      });
+      //print("该死$workDir喵");
+    } catch (e) {
+      print('Error: $e');
+      setState(() { isLoading = false; });
     }
-  
-    if (!await targetDir.exists()) {                            //确保目录存在喵
-      await targetDir.create(recursive: true);
-    }
-    if (!await inputDir.exists()) {
-      await inputDir.create(recursive: true);
-    }
-    if (!await outputDir.exists()) {
-      await outputDir.create(recursive: true);
-    }
-  
-    workDir = targetDir.path; 
-    print("该死$workDir喵");
   }
 
 
   List<File> fileList = [];                                   //文件列表喵
 
   void pickFile(int sukiCategory) async {                                     //获取文件喵
-    if(sukiCategory == 1) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.video,
-        allowMultiple: true,
-      );
-      if(result != null && result.files.isNotEmpty){
-        setState(() {
-          fileList += result.paths.map((path) => File(path!)).toList();
-        });
-      }
-    }
-    else {
-      SnackBar(content: Text('Failed to pick file'));
-    }
-if(sukiCategory == 2) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.image,
-        allowMultiple: true,
-      );
-      if(result != null && result.files.isNotEmpty){
-        setState(() {
-          fileList += result.paths.map((path) => File(path!)).toList();
-        });
-      }
-    }
-    else {
-      SnackBar(content: Text('Failed to pick file'));
-    }
-if(sukiCategory == 3) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.audio,
-        allowMultiple: true,
-      );
-      if(result != null && result.files.isNotEmpty){
-        setState(() {
-          fileList += result.paths.map((path) => File(path!)).toList();
-        });
-      }
-    }
-    else {
-      SnackBar(content: Text('Failed to pick file'));
-    }
-if(sukiCategory == 4) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.video,
-        allowMultiple: true,
-      );
-      if(result != null && result.files.isNotEmpty){
-        setState(() {
-          fileList += result.paths.map((path) => File(path!)).toList();
-        });
-      }
-    }
-    else {
-      SnackBar(content: Text('Failed to pick file'));
-    }
-  }
 
+    // var status = await Permission.storage.status;
+    // if (!status.isGranted) {
+    //   status = await Permission.storage.request();
+    // }
+    // if (status.isGranted) {
+    //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+    //     type: FileType.video,
+    //     allowMultiple: true,
+    //   );
+    //   if (result != null && result.files.isNotEmpty) {
+    //     setState(() {
+    //       fileList += result.paths.map((path) => File(path!)).toList();
+    //     });
+    //   } else {
+    //     SnackBar(content: Text('Failed to pick file'));
+    //   }
+    // } else {
+    //   SnackBar(content: Text('Permission Denied'));
+    // }
+
+    void pickFile(int sukiCategory) async {
+      Permission? perm;
+      FileType fileType = FileType.any;
+
+      if (sukiCategory == 1 || sukiCategory == 4) {
+        perm = Permission.videos;
+        fileType = FileType.video;
+      } else if (sukiCategory == 2) {
+        perm = Permission.photos;
+        fileType = FileType.image;
+      } else if (sukiCategory == 3) {
+        perm = Permission.audio;
+        fileType = FileType.audio;
+      } else {
+        perm = Permission.manageExternalStorage;
+      }
+
+      var status = await perm!.status;
+      if (!status.isGranted) {
+        status = await perm.request();
+      }
+
+      if (status.isGranted) {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: fileType,
+          allowMultiple: true,
+        );
+        if (result != null && result.files.isNotEmpty) {
+          setState(() {
+            fileList += result.paths.map((path) => File(path!)).toList();
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to pick file')));
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Permission Denied')));
+      }
+    }
+    
+  }
 /*
   void goToPickFile() async {
     showDialog(
@@ -212,10 +224,16 @@ if(sukiCategory == 4) {
   
 
   @override
+  void initState() {
+    super.initState();
+    _getWorkingDir();  // 这里调用，但由于async，需setState更新
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     print("类别${widget.selectedCategory}");
 
-    _getWorkingDir();
     return Scaffold(
       appBar: AppBar(
         titleTextStyle: TextStyle(
@@ -266,14 +284,16 @@ if(sukiCategory == 4) {
         child: Icon(Icons.save),
       ),
 
-      body: ListView.builder(
-        itemCount: fileList.length,
-        itemBuilder: (context, index){
-          return FileList(
-            fileName: fileList[index].path.split('/').last,
-            deleteFunction: (context) => removeFile(index),
-          );
-        },
+      body: isLoading
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+          itemCount: fileList.length,
+          itemBuilder: (context, index){
+            return FileList(
+              fileName: fileList[index].path.split('/').last,
+              deleteFunction: (context) => removeFile(index),
+            );
+          },
       ),
 
     );
