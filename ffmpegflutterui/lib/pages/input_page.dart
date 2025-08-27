@@ -5,7 +5,6 @@ import 'package:ffmpegflutterui/utils/file_list.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class InputPage extends StatefulWidget {
   int selectedFunction;
@@ -60,95 +59,41 @@ class _InputPageState extends State<InputPage> {
 
   List<File> fileList = [];                                   //文件列表喵
 
-  void pickFile(int sukiCategory) async {                                     //获取文件喵
+  void pickFile(int sukiCategory) async {
+    FileType fileType = FileType.any;
 
-    // var status = await Permission.storage.status;
-    // if (!status.isGranted) {
-    //   status = await Permission.storage.request();
-    // }
-    // if (status.isGranted) {
-    //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-    //     type: FileType.video,
-    //     allowMultiple: true,
-    //   );
-    //   if (result != null && result.files.isNotEmpty) {
-    //     setState(() {
-    //       fileList += result.paths.map((path) => File(path!)).toList();
-    //     });
-    //   } else {
-    //     SnackBar(content: Text('Failed to pick file'));
-    //   }
-    // } else {
-    //   SnackBar(content: Text('Permission Denied'));
-    // }
-
-    void pickFile(int sukiCategory) async {
-      Permission? perm;
-      FileType fileType = FileType.any;
-
-      if (sukiCategory == 1 || sukiCategory == 4) {
-        perm = Permission.videos;
-        fileType = FileType.video;
-      } else if (sukiCategory == 2) {
-        perm = Permission.photos;
-        fileType = FileType.image;
-      } else if (sukiCategory == 3) {
-        perm = Permission.audio;
-        fileType = FileType.audio;
-      } else {
-        perm = Permission.manageExternalStorage;
-      }
-
-      var status = await perm!.status;
-      if (!status.isGranted) {
-        status = await perm.request();
-      }
-
-      if (status.isGranted) {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: fileType,
-          allowMultiple: true,
-        );
-        if (result != null && result.files.isNotEmpty) {
-          setState(() {
-            fileList += result.paths.map((path) => File(path!)).toList();
-          });
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to pick file')));
-        }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Permission Denied')));
-      }
+    if (sukiCategory == 1 || sukiCategory == 4) {
+      fileType = FileType.video;
+    } else if (sukiCategory == 2) {
+      fileType = FileType.image;
+    } else if (sukiCategory == 3) {
+      fileType = FileType.audio;
     }
-    
-  }
-/*
-  void goToPickFile() async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DialogBox(
-          selectedFormat: _getFormatFromDialogBox,
-          selectedCategory: widget.selectedCategory,
-          addFile: _getFileFromDialogBox,
+
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: fileType,
+        allowMultiple: true,
+      );
+      if (result != null && result.files.isNotEmpty) {
+        setState(() {
+          fileList += result.paths.map((path) => File(path!)).toList();
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Files picked successfully')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('No files selected')),
         );
       }
-    );
+    } catch (e) {
+      print('Pick file error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to pick files: $e')),
+      );
+    }
   }
-
-  void _getFileFromDialogBox(List<File> newFile) {
-    setState(() {
-      fileList += newFile;
-    });
-  }
-
-  String selectedFormat = "All";
-  void _getFormatFromDialogBox(String sukiFormat) {
-    setState(() {
-      selectedFormat = sukiFormat;
-    });
-  }
-  */
 
   bool isCopying = false;
   double progress = 0;
